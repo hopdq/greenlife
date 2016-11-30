@@ -5,3 +5,16 @@
 @Html.Partial("MostPopular")
 @Html.Partial("RecentProducts")
 @Html.Partial("ProductsInCategories")
+<script>
+    $(document).ready(function () {
+        $(".slider").owlCarousel({
+            navigation: false,
+            pagination: true,
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            autoPlay: 7000,
+            autoHeight: true,
+            singleItem: true
+        });
+    });
+</script>
