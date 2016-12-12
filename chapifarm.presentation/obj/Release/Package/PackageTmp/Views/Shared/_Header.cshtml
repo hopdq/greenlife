@@ -1,0 +1,254 @@
+﻿<section class="header-container" data-bind="with: header">
+    <div id="topbar">
+        <div class="container">
+            <div class="row">
+                <ul class="top-info col-sm-4 ">
+                    <li><a href="http://caudatfarm.com/">Sản phẩm từ NÔNG TRẠI</a></li>
+                    <li><a href="/"></a></li>
+                </ul>
+                <ul class="top-callcenter col-md-7 col-sm-8 hidden-xs">
+                    <li class="hotline">1800 11 92<span> (Miễn phí)</span></li>
+                    <li class="open-time">Đặt mua và tư vấn 8.00h - 18.00h hàng ngày</li>
+                </ul>
+                <ul class="top-cart col-sm-1  pull-right">
+                    <li class="top-cart-toogle">
+                        <a href="/cart">
+                            <span class="count">0</span>
+                        </a>
+                        <div class="cart_toogleshow">
+                            <div class="cartshow">
+                                <div class="line-item clearfix original">
+                                    <div class="item_image">
+                                        <a href="">
+                                            <img src="">
+                                        </a>
+                                    </div>
+                                    <div class="cart-item-info">
+                                        <a href="" class="text-capitalize">
+                                            <strong class="item_title"></strong>
+                                            <span class="variant_title"></span>
+                                        </a><br>
+                                        <span class="price text-capitalize"></span><br>
+                                        <div class="quantity" data-item="">
+                                            <i class="fa fa-times remove" aria-hidden="true"></i>
+                                            <strong>Số lượng:</strong>&nbsp;&nbsp;
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                            <input type="number" size="4" min="1" id="" value="">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="line-item text-center clearfix">
+                                    <p>Bạn hưa có sản phẩm nào trong giỏ hàng</p>
+                                </div>
+
+                            </div>
+                            <div class="total-price text-capitalize">
+                                <span class="pull-left">Tổng tiền:</span>
+                                <span class="total_price_topcart pull-right">0₫</span>
+                            </div>
+                            <a href="/checkout" class="checkout_topcart">ĐẶT MUA</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="header-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 visible-xs">
+                    <button type="button" class="navbar-toggle pull-left toggle-mobile-menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="col-sm-4 col-xs-9">
+                    <div class="logo">
+                        <a href="http://caudatfarm.com" title="Cầu Đất Farm - Nông Trại từ Đà Lạt">
+                            <img src="//hstatic.net/704/1000059704/1000177804/logo.png?v=1072" alt="logo" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <form id="search_form" action="/search" method="get" class="header-search">
+                        <div class="input-group">
+                            <input type="hidden" name="type" value="product">
+                            <input type="text" name="q" autocomplete="off" class="form-control" value="" placeholder="Tìm kiếm sản phẩm, danh mục...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search "></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="header-menu" class="hidden-xs">
+        <div class="container">
+            <nav id="main-menu">
+                <ul>
+                    <li class="home"><a href="/" title="home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <!-- ko foreach: navigation -->
+                    <li data-bind="attr: { class: hasSubClass }">
+                        <a data-bind="attr: { href: url, title: name }" class="">
+                            <span data-bind="text: name"></span>
+                        </a>
+                        <ul class="sub-menu" data-bind="if: hasChild">
+                            <!-- ko foreach: children -->
+                            <li>
+                                <a data-bind="attr: { href: url, title: name }, text: name"></a>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="header-fixed">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1 col-xs-2 hidden-lg hidden-md pull-left">
+                    <button type="button" class="navbar-toggle pull-left toggle-mobile-menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="col-sm-10 col-xs-8 hidden-lg hidden-md logo_mb_hf">
+                    <a href="/" title="home">	<img src="//hstatic.net/704/1000059704/1000177804/logo.png?v=1072" alt="logo" class="img-responsive"></a>
+                </div>
+                <ul class="fixed-bar col-md-11 hidden-sm hidden-xs pull-left">
+                    <li class="home"><a href="/" title="home">	<img src="//hstatic.net/704/1000059704/1000177804/logo.png?v=1072" alt="logo" class="img-responsive"></a></li>
+
+
+                    <li class="has-sub">
+                        <a href="/collections/rau-cu" title="Rau củ Đà Lạt" class="">
+                            <span>Rau củ Đà Lạt</span>
+                        </a>
+                        <ul class="sub-menu">
+
+                            <li>
+                                <a href="/collections/rau-cu" title="Rau ăn thân củ quả">Rau ăn thân củ quả</a>
+                            </li>
+
+                            <li>
+                                <a href="/collections/rau-an-la" title="Rau ăn lá">Rau ăn lá</a>
+                            </li>
+
+                            <li>
+                                <a href="/collections/gia-vi" title="Gia vị">Gia vị</a>
+                            </li>
+
+                            <li>
+                                <a href="/collections/trai-cay" title="Trái cây">Trái cây</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+
+                    <li class="has-sub">
+                        <a href="/collections/ca-phe" title="Cà phê" class="">
+                            <span>Cà phê</span>
+                        </a>
+                        <ul class="sub-menu"></ul>
+                    </li>
+
+
+
+                    <li class="has-sub">
+                        <a href="/collections/tra" title="Trà" class="">
+                            <span>Trà</span>
+                        </a>
+                        <ul class="sub-menu">
+
+                            <li>
+                                <a href="/collections/tra-xanh" title="Trà xanh">Trà xanh</a>
+                            </li>
+
+                            <li>
+                                <a href="/collections/tra-oolong" title="Trà Oolong">Trà Oolong</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/collections/hoa-tuoi" class="" title="Hoa Tươi">
+                            Hoa Tươi
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/collections/hinh-anh-nong-trai" class="" title="Hình Ảnh Nông Trại">
+                            Hình Ảnh Nông Trại
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/products/hong-treo-da-lat-250gr-1" class="" title="Hồng Treo Đà Lạt">
+                            Hồng Treo Đà Lạt
+                        </a>
+                    </li>
+
+
+                    <li class="fixed-search hidden-xs">
+                        <div class="btn-group">
+                            <button type="button" class="dropdown-toggle icon-search" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-search "></i>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="search-bar">
+                                    <form action="/search">
+                                        <input type="hidden" name="type" value="product">
+                                        <input type="text" name="q" placeholder="Bạn đang tìm...">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="top-cart col-sm-1 col-xs-2 pull-right">
+                    <li class="top-cart-toogle">
+                        <a href="/cart">
+                            <span class="count">0</span>
+                        </a>
+                        <div class="cart_toogleshow">
+                            <div class="cartshow">
+
+
+                                <div class="line-item text-center clearfix">
+                                    <p>Bạn hưa có sản phẩm nào trong giỏ hàng</p>
+                                </div>
+
+                            </div>
+                            <div class="total-price text-capitalize">
+                                <span class="pull-left">Tổng tiền:</span>
+                                <span class="total_price_topcart pull-right">0₫</span>
+                            </div>
+                            <a href="/checkout" class="checkout_topcart">ĐẶT MUA</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
