@@ -1,62 +1,13 @@
 ﻿<section id="top-product-like" class="hidden-xs clearfix">
     <div class="container">
         <h2 class="title-protop"><span>SẢN PHẨM ĐƯỢC TÌM MUA NHIỀU NHẤT</span></h2>
-
-
-
-
+        <!-- ko foreach: featureProducts-->
         <div class="col-5th">
-            <a href="http://caudatfarm.com/products/ca-chua-dl-1">
-                <div class="product_top product_top_1 effect-opacity"> </div>
+            <a data-bind="attr: { href: link, title: text }">
+                <img data-bind="attr: { src: imgPath, alt: text }" />
             </a>
         </div>
-
-
-
-
-
-        <div class="col-5th">
-            <a href="http://caudatfarm.com/search?type=product&amp;q=x%C3%A0+l%C3%A1ch">
-                <div class="product_top product_top_2 effect-opacity"> </div>
-            </a>
-        </div>
-
-
-
-
-
-        <div class="col-5th">
-            <a href="http://caudatfarm.com/collections/tra-xanh">
-                <div class="product_top product_top_3 effect-opacity"> </div>
-            </a>
-        </div>
-
-
-
-
-
-        <div class="col-5th">
-            <a href="http://caudatfarm.com/search?type=product&amp;q=%E1%BB%9Bt+chu%C3%B4ng">
-                <div class="product_top product_top_4 effect-opacity"> </div>
-            </a>
-        </div>
-
-
-
-
-
-        <div class="col-5th">
-            <a href="http://caudatfarm.com/products/su-su-1">
-                <div class="product_top product_top_5 effect-opacity"> </div>
-            </a>
-        </div>
-
-
-        <div class="col-xs-12">
-            <p class="text-center text-viewmore">
-                <a href="http://caudatfarm.com/collections/rau-cu"> </a>
-            </p>
-        </div>
+        <!-- /ko -->
     </div>
 </section>
 

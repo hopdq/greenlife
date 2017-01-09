@@ -130,85 +130,20 @@
                 <ul class="fixed-bar col-md-11 hidden-sm hidden-xs pull-left">
                     <li class="home"><a href="/" title="home">	<img src="//hstatic.net/704/1000059704/1000177804/logo.png?v=1072" alt="logo" class="img-responsive"></a></li>
 
-
-                    <li class="has-sub">
-                        <a href="/collections/rau-cu" title="Rau củ Đà Lạt" class="">
-                            <span>Rau củ Đà Lạt</span>
+                    <!-- ko foreach: navigation -->
+                    <li data-bind="attr: { class: hasSubClass }">
+                        <a data-bind="attr: { href: url, title: name }" class="">
+                            <span data-bind="text: name"></span>
                         </a>
-                        <ul class="sub-menu">
-
+                        <ul class="sub-menu" data-bind="if: hasChild">
+                            <!-- ko foreach: children -->
                             <li>
-                                <a href="/collections/rau-cu" title="Rau ăn thân củ quả">Rau ăn thân củ quả</a>
+                                <a data-bind="attr: { href: url, title: name }, text: name"></a>
                             </li>
-
-                            <li>
-                                <a href="/collections/rau-an-la" title="Rau ăn lá">Rau ăn lá</a>
-                            </li>
-
-                            <li>
-                                <a href="/collections/gia-vi" title="Gia vị">Gia vị</a>
-                            </li>
-
-                            <li>
-                                <a href="/collections/trai-cay" title="Trái cây">Trái cây</a>
-                            </li>
-
+                            <!-- /ko -->
                         </ul>
                     </li>
-
-
-
-                    <li class="has-sub">
-                        <a href="/collections/ca-phe" title="Cà phê" class="">
-                            <span>Cà phê</span>
-                        </a>
-                        <ul class="sub-menu"></ul>
-                    </li>
-
-
-
-                    <li class="has-sub">
-                        <a href="/collections/tra" title="Trà" class="">
-                            <span>Trà</span>
-                        </a>
-                        <ul class="sub-menu">
-
-                            <li>
-                                <a href="/collections/tra-xanh" title="Trà xanh">Trà xanh</a>
-                            </li>
-
-                            <li>
-                                <a href="/collections/tra-oolong" title="Trà Oolong">Trà Oolong</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-
-
-                    <li>
-                        <a href="/collections/hoa-tuoi" class="" title="Hoa Tươi">
-                            Hoa Tươi
-                        </a>
-                    </li>
-
-
-
-                    <li>
-                        <a href="/collections/hinh-anh-nong-trai" class="" title="Hình Ảnh Nông Trại">
-                            Hình Ảnh Nông Trại
-                        </a>
-                    </li>
-
-
-
-                    <li>
-                        <a href="/products/hong-treo-da-lat-250gr-1" class="" title="Hồng Treo Đà Lạt">
-                            Hồng Treo Đà Lạt
-                        </a>
-                    </li>
-
-
+                    <!-- /ko -->
                     <li class="fixed-search hidden-xs">
                         <div class="btn-group">
                             <button type="button" class="dropdown-toggle icon-search" data-toggle="dropdown" aria-expanded="false">

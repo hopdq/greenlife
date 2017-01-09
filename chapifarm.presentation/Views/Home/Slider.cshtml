@@ -1,48 +1,12 @@
 ﻿<section id="home-slider">
-    <div class="slider">
+    <div class="slider" data-bind="foreach: slider">
         <div class="item">
-            <a href="http://caudatfarm.com/collections/hoa-tuoi">
-                <img src="//hstatic.net/704/1000059704/1000177804/slideshow_1.jpg?v=1102">
+            <a data-bind="attr: { href: link, title: text }">
+                <img data-bind="attr: { src: imgPath, alt: text} " />
             </a>
-            <div class="text">
+            <div class="text" data-bind="text: text">
             </div>
         </div>
-
-        <div class="item">
-            <a href="http://caudatfarm.com/collections/rau-cu">
-                <img src="//hstatic.net/704/1000059704/1000177804/slideshow_2.jpg?v=1102">
-            </a>
-            <div class="text">
-
-            </div>
-        </div>
-
-        <div class="item">
-            <a href="http://caudatfarm.com/collections/rau-cu">
-                <img src="//hstatic.net/704/1000059704/1000177804/slideshow_3.jpg?v=1102">
-            </a>
-            <div class="text">
-
-            </div>
-        </div>
-
-        <div class="item">
-            <a href="http://caudatfarm.com/collections/tra">
-                <img src="//hstatic.net/704/1000059704/1000177804/slideshow_4.jpg?v=1102">
-            </a>
-            <div class="text">
-
-            </div>
-        </div>
-        
-        <div class="item">
-            <a href="http://caudatfarm.com/collections/ca-phe">
-                <img src="//hstatic.net/704/1000059704/1000177804/slideshow_5.jpg?v=1102">
-            </a>
-            <div class="text">
-
-            </div>
-        </div>
-
     </div>
+    <input type="hidden" id="slider_flag" />
 </section>

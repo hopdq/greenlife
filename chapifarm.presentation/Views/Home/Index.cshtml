@@ -1,20 +1,24 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- ko with: body -->
 @Html.Partial("Slider")
 @Html.Partial("MostPopular")
 @Html.Partial("RecentProducts")
 @Html.Partial("ProductsInCategories")
+<!-- /ko -->
 <script>
-    $(document).ready(function () {
-        $(".slider").owlCarousel({
-            navigation: false,
-            pagination: true,
-            slideSpeed: 300,
-            paginationSpeed: 400,
-            autoPlay: 7000,
-            autoHeight: true,
-            singleItem: true
+    $(function () {
+        $('#slider_flag').change(function () {
+            $(".slider").owlCarousel({
+                navigation: false,
+                pagination: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                autoPlay: 7000,
+                autoHeight: true,
+                singleItem: true
+            });
         });
     });
 </script>
