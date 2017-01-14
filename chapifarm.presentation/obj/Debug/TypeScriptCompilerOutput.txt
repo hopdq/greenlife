@@ -1,0 +1,6 @@
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\shared\shared.entities.js
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\shared\shared.ajax.js
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\shared\ultilities.js
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\home\home.knockout.js
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\shared\shared.knockout.js
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\Scripts\home\home.ajax.js

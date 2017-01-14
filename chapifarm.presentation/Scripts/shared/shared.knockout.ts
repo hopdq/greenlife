@@ -1,44 +1,51 @@
-var BaseModel = (function () {
-    function BaseModel() {
-    }
+﻿class BaseModel {
     //static baseApiUrl: string = 'http://services.chapifarm.com/';
-    BaseModel.baseApiUrl = 'http://localhost:8096/';
-    BaseModel.baseWebUrl = 'http://localhost:8090/';
-    BaseModel.baseImgUrl = 'http://admin.chapifarm.com/';
-    return BaseModel;
-})();
-var Layout = (function () {
-    function Layout(body) {
+    static baseApiUrl: string = 'http://localhost:8096/';
+    static baseWebUrl: string = 'http://localhost:8090/';
+    static baseImgUrl: string = 'http://admin.chapifarm.com/';
+}
+class Layout<T extends BaseBody> {
+    header: KnockoutObservable<Header>;
+    body: KnockoutObservable<T>;
+    constructor(body: T) {
         var self = this;
         self.header = ko.observable(new Header());
         self.body = ko.observable(body);
     }
-    Layout.prototype.init = function () {
+    init() {
         var self = this;
         self.header().init();
         self.body().init();
-    };
-    return Layout;
-})();
-var Header = (function () {
-    function Header() {
+    }
+}
+class Header {
+    navigation: KnockoutObservableArray<Category>;
+    constructor() {
         var self = this;
         self.navigation = ko.observableArray([]);
     }
-    Header.prototype.init = function () {
+    init() {
         var self = this;
-        CommonServices.fetchCategoryTree().done(function (categories) {
+        CommonServices.fetchCategoryTree().done(function (categories: Array<CategoryDto>) {
             if (categories != null && categories.length > 0) {
-                $.each(categories, function (idx, cate) {
+                $.each(categories, function (idx: number, cate: CategoryDto) {
                     self.navigation.push(new Category(cate));
                 });
             }
         });
-    };
-    return Header;
-})();
-var Category = (function () {
-    function Category(dto) {
+    }
+}
+interface BaseBody {
+    init();
+}
+class Category {
+    id: KnockoutObservable<string>;
+    name: KnockoutObservable<string>;
+    url: KnockoutObservable<string>;
+    hasChild: KnockoutObservable<boolean>;
+    hasSubClass: KnockoutObservable<string>;
+    children: KnockoutObservableArray<Category>;
+    constructor(dto: CategoryDto) {
         var self = this;
         self.id = ko.observable(dto.Id);
         self.name = ko.observable(dto.Name);
@@ -52,15 +59,16 @@ var Category = (function () {
             });
         }
     }
-    return Category;
-})();
-var Banner = (function () {
-    function Banner(dto) {
+}
+class Banner {
+    id: KnockoutObservable<string>;
+    text: KnockoutObservable<string>;
+    imgPath: KnockoutObservable<string>;
+    link: KnockoutObservable<string>;
+    constructor(dto: BannerDto) {
         this.id = ko.observable(dto.Id);
         this.text = ko.observable(dto.Text);
         this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
-        this.link = ko.observable(dto.Link);
+        this.link = ko.observable(dto.Link)
     }
-    return Banner;
-})();
-//# sourceMappingURL=shared.knockout.js.map
+}

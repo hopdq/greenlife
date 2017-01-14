@@ -240,6 +240,6 @@ D:\source\ChapiFarm\greenlife\chapifarm.presentation\bin\Microsoft.Owin.Security
 D:\source\ChapiFarm\greenlife\chapifarm.presentation\bin\Microsoft.Owin.Security.Google.xml
 D:\source\ChapiFarm\greenlife\chapifarm.presentation\bin\Microsoft.Owin.Security.Twitter.xml
 D:\source\ChapiFarm\greenlife\chapifarm.presentation\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\source\ChapiFarm\greenlife\chapifarm.presentation\obj\Debug\chapifarm.presentation.csprojResolveAssemblyReference.cache
 D:\source\ChapiFarm\greenlife\chapifarm.presentation\obj\Debug\chapifarm.presentation.dll
 D:\source\ChapiFarm\greenlife\chapifarm.presentation\obj\Debug\chapifarm.presentation.pdb
+D:\source\ChapiFarm\greenlife\chapifarm.presentation\obj\Debug\chapifarm.presentation.csprojResolveAssemblyReference.cache
