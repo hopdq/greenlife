@@ -10,5 +10,4 @@ var HomeServices = (function () {
         return dfd.promise();
     };
     return HomeServices;
-})();
-//# sourceMappingURL=home.ajax.js.map
+}());

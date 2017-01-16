@@ -15,5 +15,4 @@ var Utilities = (function () {
         return num.toFixed(c).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     };
     return Utilities;
-})();
-//# sourceMappingURL=ultilities.js.map
+}());

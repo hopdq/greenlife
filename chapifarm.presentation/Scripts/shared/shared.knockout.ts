@@ -1,7 +1,7 @@
 ﻿class BaseModel {
     //static baseApiUrl: string = 'http://services.chapifarm.com/';
-    static baseApiUrl: string = 'http://localhost:8096/';
-    static baseWebUrl: string = 'http://localhost:8090/';
+    static baseApiUrl: string = 'http://services.chapifarm.com/';
+    static baseWebUrl: string = 'http://chapifarm.com/';
     static baseImgUrl: string = 'http://admin.chapifarm.com/';
 }
 class Layout<T extends BaseBody> {

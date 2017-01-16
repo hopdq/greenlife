@@ -18,5 +18,4 @@ var CommonServices = (function () {
         return dfd.promise();
     };
     return CommonServices;
-})();
-//# sourceMappingURL=shared.ajax.js.map
+}());

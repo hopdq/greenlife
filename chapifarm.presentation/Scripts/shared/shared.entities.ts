@@ -1,5 +1,6 @@
 ﻿class CategoryDto {
     Id: string;
+    Icon: string;
     Name: string;
     Url: string;
     Children: Array<CategoryDto>;

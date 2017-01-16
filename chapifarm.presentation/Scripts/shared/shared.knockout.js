@@ -2,11 +2,11 @@ var BaseModel = (function () {
     function BaseModel() {
     }
     //static baseApiUrl: string = 'http://services.chapifarm.com/';
-    BaseModel.baseApiUrl = 'http://localhost:8096/';
-    BaseModel.baseWebUrl = 'http://localhost:8090/';
+    BaseModel.baseApiUrl = 'http://services.chapifarm.com/';
+    BaseModel.baseWebUrl = 'http://chapifarm.com/';
     BaseModel.baseImgUrl = 'http://admin.chapifarm.com/';
     return BaseModel;
-})();
+}());
 var Layout = (function () {
     function Layout(body) {
         var self = this;
@@ -19,7 +19,7 @@ var Layout = (function () {
         self.body().init();
     };
     return Layout;
-})();
+}());
 var Header = (function () {
     function Header() {
         var self = this;
@@ -36,7 +36,7 @@ var Header = (function () {
         });
     };
     return Header;
-})();
+}());
 var Category = (function () {
     function Category(dto) {
         var self = this;
@@ -53,7 +53,7 @@ var Category = (function () {
         }
     }
     return Category;
-})();
+}());
 var Banner = (function () {
     function Banner(dto) {
         this.id = ko.observable(dto.Id);
@@ -62,5 +62,4 @@ var Banner = (function () {
         this.link = ko.observable(dto.Link);
     }
     return Banner;
-})();
-//# sourceMappingURL=shared.knockout.js.map
+}());
