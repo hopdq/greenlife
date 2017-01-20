@@ -164,7 +164,6 @@ class Product {
         self.name = ko.observable(dto.Name);
         self.imgPath = ko.observable(dto.ImagePath);
         self.priceString = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
-        self.price = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
         self.url = ko.observable(Utilities.buildWebUrl(dto.UrlSlug));
         self.isNew = ko.observable(dto.New)
         self.isGift = ko.observable(dto.Gift);
