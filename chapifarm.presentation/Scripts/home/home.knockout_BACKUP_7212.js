@@ -146,11 +146,14 @@ var Product = (function () {
         self.id = ko.observable(dto.ProductId);
         self.name = ko.observable(dto.Name);
         self.imgPath = ko.observable(dto.ImagePath);
+<<<<<<< HEAD
         self.priceString = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
+=======
+        self.price = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
+>>>>>>> working with tab
         self.url = ko.observable(Utilities.buildWebUrl(dto.UrlSlug));
         self.isNew = ko.observable(dto.New);
         self.isGift = ko.observable(dto.Gift);
     }
     return Product;
 }());
-//# sourceMappingURL=home.knockout.js.map
