@@ -149,7 +149,8 @@ class Product {
     id: KnockoutObservable<string>;
     name: KnockoutObservable<string>;
     imgPath: KnockoutObservable<string>;
-    price: KnockoutObservable<string>;
+    price: KnockoutObservable<number>;
+    priceString: KnockoutObservable<string>;
     promotion: KnockoutObservable<string>;
     url: KnockoutObservable<string>;
     //quantityPromotion: KnockoutObservable<string>;
@@ -162,7 +163,7 @@ class Product {
         self.id = ko.observable(dto.ProductId);
         self.name = ko.observable(dto.Name);
         self.imgPath = ko.observable(dto.ImagePath);
-        self.price = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
+        self.priceString = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
         self.url = ko.observable(Utilities.buildWebUrl(dto.UrlSlug));
         self.isNew = ko.observable(dto.New)
         self.isGift = ko.observable(dto.Gift);
