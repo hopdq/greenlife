@@ -58,15 +58,20 @@ class HomeBodyModel implements BaseBody {
         //    }
         //});
         var categories = [];
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 5; i++){
             var cate = new CategoryDto();
             cate.Id = i + "";
             cate.Icon = "https://hstatic.net/704/1000059704/1000177804/coffee.png?v=1259";
-            cate.Name = "cate "+i;
+            cate.Name = "cate " + i;
             cate.Url = "google.com";
             cate.Children = [];
-            for (var j = 0; j < categories.length; j++) {
-                cate.Children.push(categories[j]);
+            for (var j = 0; j < i; j++) {
+                var cate2 = new CategoryDto();
+                cate2.Id = j + "";
+                cate2.Icon = "https://hstatic.net/704/1000059704/1000177804/coffee.png?v=1259";
+                cate2.Name = "cate " + j;
+                cate2.Url = "google.com";
+                cate.Children.push(cate2);
             }
             categories.push(cate);
         }
@@ -79,7 +84,6 @@ class HomeBodyModel implements BaseBody {
                 self.productsInCategories.push(category);
             });
         }
-        
     }
 }
 class ProductsInCategory {
@@ -93,10 +97,12 @@ class ProductsInCategory {
         var self = this;
         this.category = ko.observable(new Category(category));
         var parentTab = new Tabs();
-        parentTab.category = this.category;
+        var curCate = $.extend(true, category, {});
+        curCate.Name = "Tất cả";
+        parentTab.category = new Category(curCate);
         self.tabs.push(parentTab);
         if (this.category().hasChild) {
-            $.each(this.category().children(), function (idx: number, child: KnockoutObservable<Category>) {
+            $.each(this.category().children(), function (idx: number, child: Category) {
                 var tab = new Tabs();
                 tab.category = child;
                 self.tabs.push(tab);
@@ -104,45 +110,72 @@ class ProductsInCategory {
         }
     }
     proceedShowParentCateProducts(): void {
-        this.tabs()[0].fetchProducts();
+        var self = this.tabs()[0];
+        self.fetchProducts().done(function (result: boolean) {
+            self.displayMode("block");
+        });
+    }
+    switchTab(data: Tabs, event): void {
+        var self = this;
+        data.fetchProducts().done(function (result: boolean) {
+            for (var i = 0; i < self.tabs().length; i++) {
+                if (self.tabs()[i].category.id != data.category.id && self.tabs()[i].displayMode() == "block") {
+                    self.tabs()[i].displayMode("none");
+                }
+            }
+            data.displayMode("block");
+        });
     }
 }
 class Tabs {
-    category: KnockoutObservable<Category>;
+    category: Category;
     products: KnockoutObservableArray<Product>;
+    displayMode: KnockoutObservable<string>;
     constructor() {
         this.products = ko.observableArray([]);
+        this.displayMode = ko.observable("none");
     }
-    fetchProducts(): void {
-        var self = this;
-        //HomeServices.getProductByCategory(self.category().id()).done(function (products: Array<ProductDto>) {
-        //    if (products != null && products.length > 0) {
-        //        $.each(products, function (idx: number, dto: ProductDto) {
-        //            self.products.push(new Product(dto));
-        //        });
-        //    }
-        //});
-        var products = [];
-        for (var i = 0; i < 10; i++) {
-            var product = new ProductDto();
-            product.ProductId = i + "";
-            product.Name = "Product" + i;
-            product.ImagePath = "https://product.hstatic.net/1000059704/product/kimchi_20su_20h_c3_a0o_bd097735ede14ca2a85a0e37e2d6d40f_medium.png";
-            product.EndUserPrice = 69000;
-            product.UrlSlug = "https://www.google.com.vn/?gfe_rd=cr&ei=Vth5WNi3MMzU8AeWz5i4CQ";
-            if (i % 2 == 0) {
-                product.New = true;
-                product.Gift = false;
-            } else {
-                product.New = false;
-                product.Gift = true;
+    fetchProducts(): JQueryPromise<boolean> {
+        var dfd = $.Deferred();
+        if (this.products().length <= 0) {
+            var self = this;
+            //HomeServices.getProductByCategory(self.category().id()).done(function (products: Array<ProductDto>) {
+            //    if (products != null && products.length > 0) {
+            //        $.each(products, function (idx: number, dto: ProductDto) {
+            //            self.products.push(new Product(dto));
+            //        });
+            //    }
+            //});
+            var products = [];
+            for (var i = 0; i < 10; i++) {
+                var product = new ProductDto();
+                product.ProductId = i + "";
+                product.Name = "Product" + i;
+                var tem = Math.floor(Math.random() * 10);
+                if (tem % 2 == 0) {
+                    product.ImagePath = "https://product.hstatic.net/1000059704/product/kimchi_20su_20h_c3_a0o_bd097735ede14ca2a85a0e37e2d6d40f_medium.png";
+                } else {
+                    product.ImagePath = "https://product.hstatic.net/1000059704/product/dau_20tay_203_large.png";
+                }
+                product.EndUserPrice = 69000;
+                product.UrlSlug = "https://www.google.com.vn/?gfe_rd=cr&ei=Vth5WNi3MMzU8AeWz5i4CQ";
+                if (i % 2 == 0) {
+                    product.New = true;
+                    product.Gift = false;
+                } else {
+                    product.New = false;
+                    product.Gift = true;
+                }
+                products.push(product);
             }
-            products.push(product);
+            $.each(products, function (idx: number, dto: ProductDto) {
+                self.products.push(new Product(dto));
+            });
+            dfd.resolve(true);
+        }else {
+            dfd.resolve(true);
         }
-        $.each(products, function (idx: number, dto: ProductDto) {
-            self.products.push(new Product(dto));
-        });
-        //$('')
+        return dfd.promise();
     }
 }
 class Product {
