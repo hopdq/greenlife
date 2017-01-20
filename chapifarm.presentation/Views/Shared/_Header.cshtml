@@ -7,47 +7,48 @@
                     <li><a href="/"></a></li>
                 </ul>
                 <ul class="top-callcenter col-md-7 col-sm-8 hidden-xs">
-                    <li class="hotline">1800 11 92<span> (Miễn phí)</span></li>
-                    <li class="open-time">Đặt mua và tư vấn 8.00h - 18.00h hàng ngày</li>
+                    <li class="hotline" data-bind="text:hotLine"></li>
+                    <li class="open-time" data-bind="text:openTime"></li>
                 </ul>
-                <ul class="top-cart col-sm-1  pull-right">
+                <ul class="top-cart col-sm-1  pull-right" data-bind="with:cart">
                     <li class="top-cart-toogle">
                         <a href="/cart">
-                            <span class="count">0</span>
+                            <span class="count" data-bind="text:totalProduct"></span>
                         </a>
                         <div class="cart_toogleshow">
                             <div class="cartshow">
+                                <!-- ko foreach: orderLine -->
                                 <div class="line-item clearfix original">
                                     <div class="item_image">
-                                        <a href="">
-                                            <img src="">
+                                        <a data-bind="attr: {href:orderLine().product().url()}">
+                                            <img data-bind="attr: {src:orderLine().product().imgPath()}">
                                         </a>
                                     </div>
                                     <div class="cart-item-info">
                                         <a href="" class="text-capitalize">
-                                            <strong class="item_title"></strong>
+                                            <strong data-bind="text:orderLine().product().name()"></strong>
                                             <span class="variant_title"></span>
                                         </a><br>
-                                        <span class="price text-capitalize"></span><br>
-                                        <div class="quantity" data-item="">
-                                            <i class="fa fa-times remove" aria-hidden="true"></i>
+                                        <span class="price text-capitalize" data-bind="text:orderLine().product().price()"></span><br>
+                                        <div class="quantity">
+                                            <i class="fa fa-times remove" aria-hidden="true" data-bind="click:cart().remove(orderLine)"></i>
                                             <strong>Số lượng:</strong>&nbsp;&nbsp;
-                                            <i class="fa fa-minus" aria-hidden="true"></i>
-                                            <input type="number" size="4" min="1" id="" value="">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <i class="fa fa-minus" aria-hidden="true" data-bind="click:orderLine().increase()"></i>
+                                            <input type="number" size="4" min="1" id="" data-bind="value: orderLine().productCount()">
+                                            <i class="fa fa-plus" aria-hidden="true" data-bind="click:orderLine().decrease()"></i>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /ko -->
 
-
-                                <div class="line-item text-center clearfix">
-                                    <p>Bạn hưa có sản phẩm nào trong giỏ hàng</p>
+                                <div class="line-item text-center clearfix" data-bind="if:noneProduct">
+                                    <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
                                 </div>
 
                             </div>
                             <div class="total-price text-capitalize">
                                 <span class="pull-left">Tổng tiền:</span>
-                                <span class="total_price_topcart pull-right">0₫</span>
+                                <span class="total_price_topcart pull-right"><span data-bind="text: totalPrice"></span>₫</span>
                             </div>
                             <a href="/checkout" class="checkout_topcart">ĐẶT MUA</a>
                         </div>
@@ -160,23 +161,45 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="top-cart col-sm-1 col-xs-2 pull-right">
+                <ul class="top-cart col-sm-1  pull-right" data-bind="with:cart">
                     <li class="top-cart-toogle">
                         <a href="/cart">
-                            <span class="count">0</span>
+                            <span class="count" data-bind="text:totalProduct"></span>
                         </a>
                         <div class="cart_toogleshow">
                             <div class="cartshow">
+                                <!-- ko foreach: orderLine -->
+                                <div class="line-item clearfix original">
+                                    <div class="item_image">
+                                        <a data-bind="attr: {href:orderLine().product().url()}">
+                                            <img data-bind="attr: {src:orderLine().product().imgPath()}">
+                                        </a>
+                                    </div>
+                                    <div class="cart-item-info">
+                                        <a href="" class="text-capitalize">
+                                            <strong data-bind="text:orderLine().product().name()"></strong>
+                                            <span class="variant_title"></span>
+                                        </a><br>
+                                        <span class="price text-capitalize" data-bind="text:orderLine().product().price()"></span><br>
+                                        <div class="quantity">
+                                            <i class="fa fa-times remove" aria-hidden="true" data-bind="click:cart().remove(orderLine)"></i>
+                                            <strong>Số lượng:</strong>&nbsp;&nbsp;
+                                            <i class="fa fa-minus" aria-hidden="true" data-bind="click:orderLine().increase()"></i>
+                                            <input type="number" size="4" min="1" id="" data-bind="value: orderLine().productCount()">
+                                            <i class="fa fa-plus" aria-hidden="true" data-bind="click:orderLine().decrease()"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
 
-
-                                <div class="line-item text-center clearfix">
-                                    <p>Bạn hưa có sản phẩm nào trong giỏ hàng</p>
+                                <div class="line-item text-center clearfix" data-bind="if:noneProduct">
+                                    <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
                                 </div>
 
                             </div>
                             <div class="total-price text-capitalize">
                                 <span class="pull-left">Tổng tiền:</span>
-                                <span class="total_price_topcart pull-right">0₫</span>
+                                <span class="total_price_topcart pull-right"><span data-bind="text: totalPrice"></span>₫</span>
                             </div>
                             <a href="/checkout" class="checkout_topcart">ĐẶT MUA</a>
                         </div>

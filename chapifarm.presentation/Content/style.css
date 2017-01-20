@@ -1171,12 +1171,12 @@ h3.title_articles_topview {
         float: left;
         display: inline-block;
     }
-
         .header-fixed .fixed-bar > li a {
             color: #919090;
             line-height: 12px;
             text-transform: capitalize;
-            padding: 0 15px;
+            padding: 18px 15px;
+            display:block;
         }
 
     .header-fixed ul.sub-menu {
