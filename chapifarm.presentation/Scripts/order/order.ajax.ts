@@ -1,4 +1,5 @@
-﻿class OrderServices {
+﻿
+class OrderServices {
     static fetchOrderProduct(productIds: Array<string>): JQueryPromise<Array<ProductDto>> {
         var dfd = $.Deferred();
         var url = Utilities.buildApiUrl('api/products/productsByIds');
