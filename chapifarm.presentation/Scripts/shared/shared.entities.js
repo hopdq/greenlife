@@ -32,4 +32,20 @@ var ProductDto = (function () {
     }
     return ProductDto;
 }());
-//# sourceMappingURL=shared.entities.js.map
+var ChapiAround = (function () {
+    function ChapiAround() {
+        var self = this;
+        self.title = ko.observable("Chapi Farm - Nông Trại Trên Thảo Nguyên");
+        self.collections = ko.observableArray([]);
+        self.around = ko.observableArray([]);
+    }
+    return ChapiAround;
+}());
+var Around = (function () {
+    function Around() {
+        var self = this;
+        self.url = ko.observable("");
+        self.imgLink = ko.observable("");
+    }
+    return Around;
+}());

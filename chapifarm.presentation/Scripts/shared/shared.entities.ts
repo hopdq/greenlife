@@ -50,3 +50,23 @@ class ProductDto {
     customise3: string
     AverageStar: number
 }
+class ChapiAround {
+    title: KnockoutObservable<string>;
+    collections: KnockoutObservableArray<string>;
+    around: KnockoutObservableArray<Around>;
+    constructor() {
+        var self = this;
+        self.title = ko.observable("Chapi Farm - Nông Trại Trên Thảo Nguyên");
+        self.collections = ko.observableArray([]);
+        self.around = ko.observableArray([]);
+    }
+}
+class Around {
+    url: KnockoutObservable<string>;
+    imgLink: KnockoutObservable<string>;
+    constructor() {
+        var self = this;
+        self.url = ko.observable("");
+        self.imgLink = ko.observable("");
+    }
+}

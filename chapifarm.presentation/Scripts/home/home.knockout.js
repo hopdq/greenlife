@@ -15,6 +15,7 @@ var HomeBodyModel = (function () {
         self.initSlider();
         self.initFeatureProducts();
         self.initProductsInCate();
+        self.initChapiAround();
     };
     HomeBodyModel.prototype.initSlider = function () {
         var self = this;
@@ -55,6 +56,24 @@ var HomeBodyModel = (function () {
                 });
             }
         });
+    };
+    HomeBodyModel.prototype.initChapiAround = function () {
+        var self = this;
+        var cpa = new ChapiAround();
+        cpa.collections(['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá']);
+        var aroundArray = [];
+        for (var i = 0; i < 10; i++) {
+            var around = new Around();
+            around.url("https://caudatfarm.com/collections/hinh-anh-nong-trai");
+            if (i % 2 == 0) {
+                around.imgLink("https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_4.jpg?v=426");
+            }
+            else {
+                around.imgLink("https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_3.jpg?v=426");
+            }
+            aroundArray.push(around);
+        }
+        cpa.around(aroundArray);
     };
     return HomeBodyModel;
 }());
@@ -137,4 +156,3 @@ var Product = (function () {
     }
     return Product;
 }());
-//# sourceMappingURL=home.knockout.js.map

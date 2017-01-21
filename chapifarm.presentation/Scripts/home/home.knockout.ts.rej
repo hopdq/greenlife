@@ -1,9 +1,0 @@
-diff a/chapifarm.presentation/Scripts/home/home.knockout.ts b/chapifarm.presentation/Scripts/home/home.knockout.ts	(rejected hunks)
-@@ -163,6 +163,7 @@
-          self.id = ko.observable(dto.ProductId);
-          self.name = ko.observable(dto.Name);
-          self.imgPath = ko.observable(dto.ImagePath);
-++<<<<<<< HEAD
- +        self.priceString = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
- +=======
-          self.price = ko.observable(Utilities.formatNumber(dto.EndUserPrice));

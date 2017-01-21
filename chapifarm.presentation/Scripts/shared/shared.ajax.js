@@ -19,4 +19,3 @@ var CommonServices = (function () {
     };
     return CommonServices;
 }());
-//# sourceMappingURL=shared.ajax.js.map
