@@ -48,42 +48,16 @@ class HomeBodyModel implements BaseBody {
     }
     initProductsInCate() {
         var self = this;
-        //CommonServices.fetchCategoryTree().done(function (categories: Array<CategoryDto>) {
-        //    if (categories != null && categories.length > 0) {
-        //        $.each(categories, function (idx: number, cate: CategoryDto) {
-        //            var category = new ProductsInCategory();
-        //            category.setCategory(cate);
-        //            category.fetchProducts();
-        //        });
-        //    }
-        //});
-        var categories = [];
-        for (var i = 0; i < 5; i++) {
-            var cate = new CategoryDto();
-            cate.Id = i + "";
-            cate.Icon = "https://hstatic.net/704/1000059704/1000177804/coffee.png?v=1259";
-            cate.Name = "cate " + i;
-            cate.Url = "google.com";
-            cate.Children = [];
-            for (var j = 0; j < i; j++) {
-                var cate2 = new CategoryDto();
-                cate2.Id = j + "";
-                cate2.Icon = "https://hstatic.net/704/1000059704/1000177804/coffee.png?v=1259";
-                cate2.Name = "cate " + j;
-                cate2.Url = "google.com";
-                cate.Children.push(cate2);
+        CommonServices.fetchCategoryTree().done(function (categories: Array<CategoryDto>) {
+            if (categories != null && categories.length > 0) {
+                $.each(categories, function (idx: number, cate: CategoryDto) {
+                    var category = new ProductsInCategory();
+                    category.setCategory(cate);
+                    category.proceedShowParentCateProducts();
+                    self.productsInCategories.push(category);
+                });
             }
-            categories.push(cate);
-        }
-
-        if (categories != null && categories.length > 0) {
-            $.each(categories, function (idx: number, cate: CategoryDto) {
-                var category = new ProductsInCategory();
-                category.setCategory(cate);
-                category.proceedShowParentCateProducts();
-                self.productsInCategories.push(category);
-            });
-        }
+        });
     }
 }
 class ProductsInCategory {
@@ -139,39 +113,14 @@ class Tabs {
         var dfd = $.Deferred();
         if (this.products().length <= 0) {
             var self = this;
-            //HomeServices.getProductByCategory(self.category().id()).done(function (products: Array<ProductDto>) {
-            //    if (products != null && products.length > 0) {
-            //        $.each(products, function (idx: number, dto: ProductDto) {
-            //            self.products.push(new Product(dto));
-            //        });
-            //    }
-            //});
-            var products = [];
-            for (var i = 0; i < 10; i++) {
-                var product = new ProductDto();
-                product.ProductId = i + "";
-                product.Name = "Product" + i;
-                var tem = Math.floor(Math.random() * 10);
-                if (tem % 2 == 0) {
-                    product.ImagePath = "https://product.hstatic.net/1000059704/product/kimchi_20su_20h_c3_a0o_bd097735ede14ca2a85a0e37e2d6d40f_medium.png";
-                } else {
-                    product.ImagePath = "https://product.hstatic.net/1000059704/product/dau_20tay_203_large.png";
+            HomeServices.getProductByCategory(self.category.id(), DateGetInfoEnum.HomeProductGetNumber).done(function (products: Array<ProductDto>) {
+                if (products != null && products.length > 0) {
+                    $.each(products, function (idx: number, dto: ProductDto) {
+                        self.products.push(new Product(dto));
+                    });
+                    dfd.resolve(true);
                 }
-                product.EndUserPrice = 69000;
-                product.UrlSlug = "https://www.google.com.vn/?gfe_rd=cr&ei=Vth5WNi3MMzU8AeWz5i4CQ";
-                if (i % 2 == 0) {
-                    product.IsNew = true;
-                    product.IsGift = false;
-                } else {
-                    product.IsNew = false;
-                    product.IsGift = true;
-                }
-                products.push(product);
-            }
-            $.each(products, function (idx: number, dto: ProductDto) {
-                self.products.push(new Product(dto));
             });
-            dfd.resolve(true);
         } else {
             dfd.resolve(true);
         }
@@ -192,7 +141,7 @@ class Product {
         var self = this;
         self.id = ko.observable(dto.ProductId);
         self.name = ko.observable(dto.Name);
-        self.imgPath = ko.observable(dto.ImagePath);
+        self.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImagePath));
         self.price = ko.observable(dto.PromotionPrice);
         self.priceString = ko.observable(Utilities.formatNumber(dto.PromotionPrice));
         self.url = ko.observable(Utilities.buildWebUrl(dto.UrlSlug));

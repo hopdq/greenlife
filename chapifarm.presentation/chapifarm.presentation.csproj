@@ -261,7 +261,6 @@
     <Content Include="Views\Home\MostPopular.cshtml" />
     <Content Include="Views\Home\ProductsGrid.cshtml" />
     <Content Include="Views\Home\ProductsInCategories.cshtml" />
-    <Content Include="Views\Home\RecentProducts.cshtml" />
     <Content Include="Views\Home\Slider.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
