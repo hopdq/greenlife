@@ -32,14 +32,14 @@ var ProductDto = (function () {
     }
     return ProductDto;
 }());
-var ChapiAround = (function () {
-    function ChapiAround() {
+var AroundFarm = (function () {
+    function AroundFarm() {
         var self = this;
         self.title = ko.observable("Chapi Farm - Nông Trại Trên Thảo Nguyên");
         self.collections = ko.observableArray([]);
         self.around = ko.observableArray([]);
     }
-    return ChapiAround;
+    return AroundFarm;
 }());
 var Around = (function () {
     function Around() {

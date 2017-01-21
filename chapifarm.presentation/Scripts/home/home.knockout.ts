@@ -8,7 +8,7 @@ class HomeBodyModel implements BaseBody {
     slider: KnockoutObservableArray<Banner>;
     featureProducts: KnockoutObservableArray<Banner>;
     productsInCategories: KnockoutObservableArray<ProductsInCategory>;
-    chapiAround: KnockoutObservable<ChapiAround>;
+    chapiAround: KnockoutObservable<AroundFarm>;
     constructor() {
         this.slider = ko.observableArray([]);
         this.featureProducts = ko.observableArray([]);
@@ -63,7 +63,7 @@ class HomeBodyModel implements BaseBody {
     }
     initChapiAround() {
         var self = this;
-        var cpa = new ChapiAround();
+        var cpa = new AroundFarm();
         cpa.collections(['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá']);
         var aroundArray = [];
         for (var i = 0; i < 10; i++){

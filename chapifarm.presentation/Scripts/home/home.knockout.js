@@ -59,7 +59,7 @@ var HomeBodyModel = (function () {
     };
     HomeBodyModel.prototype.initChapiAround = function () {
         var self = this;
-        var cpa = new ChapiAround();
+        var cpa = new AroundFarm();
         cpa.collections(['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá']);
         var aroundArray = [];
         for (var i = 0; i < 10; i++) {

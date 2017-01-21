@@ -50,7 +50,8 @@ class ProductDto {
     customise3: string
     AverageStar: number
 }
-class ChapiAround {
+
+class AroundFarm {
     title: KnockoutObservable<string>;
     collections: KnockoutObservableArray<string>;
     around: KnockoutObservableArray<Around>;

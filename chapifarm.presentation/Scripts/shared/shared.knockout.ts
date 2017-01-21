@@ -42,6 +42,27 @@ class Header {
         });
     }
 }
+class Footer {
+    aroundFarm: KnockoutObservable<AroundFarm>;
+    showroom: KnockoutObservable<String>;
+    orderInfo: KnockoutObservable<String>;
+    categoryFooter: KnockoutObservable<String>;
+    contact: KnockoutObservable<String>;
+    constructor() {
+        var self = this;
+        self.aroundFarm = ko.observable(new AroundFarm());
+    }
+    init() {
+        var self = this;
+        //CommonServices.fetchCategoryTree().done(function (categories: Array<CategoryDto>) {
+        //    if (categories != null && categories.length > 0) {
+        //        $.each(categories, function (idx: number, cate: CategoryDto) {
+        //            self.navigation.push(new Category(cate));
+        //        });
+        //    }
+        //});
+    }
+}
 interface BaseBody {
     init();
 }
