@@ -58,7 +58,7 @@ class HomeBodyModel implements BaseBody {
         //    }
         //});
         var categories = [];
-        for (var i = 0; i < 5; i++){
+        for (var i = 0; i < 5; i++) {
             var cate = new CategoryDto();
             cate.Id = i + "";
             cate.Icon = "https://hstatic.net/704/1000059704/1000177804/coffee.png?v=1259";
@@ -160,11 +160,11 @@ class Tabs {
                 product.EndUserPrice = 69000;
                 product.UrlSlug = "https://www.google.com.vn/?gfe_rd=cr&ei=Vth5WNi3MMzU8AeWz5i4CQ";
                 if (i % 2 == 0) {
-                    product.New = true;
-                    product.Gift = false;
+                    product.IsNew = true;
+                    product.IsGift = false;
                 } else {
-                    product.New = false;
-                    product.Gift = true;
+                    product.IsNew = false;
+                    product.IsGift = true;
                 }
                 products.push(product);
             }
@@ -172,7 +172,7 @@ class Tabs {
                 self.products.push(new Product(dto));
             });
             dfd.resolve(true);
-        }else {
+        } else {
             dfd.resolve(true);
         }
         return dfd.promise();
@@ -186,9 +186,6 @@ class Product {
     priceString: KnockoutObservable<string>;
     promotion: KnockoutObservable<string>;
     url: KnockoutObservable<string>;
-    //quantityPromotion: KnockoutObservable<string>;
-    //isPercentPromotion: KnockoutObservable<boolean>;
-    //showPromotionInfor: KnockoutObservable<boolean>;
     isNew: KnockoutObservable<boolean>;
     isGift: KnockoutObservable<boolean>;
     constructor(dto: ProductDto) {
@@ -196,9 +193,10 @@ class Product {
         self.id = ko.observable(dto.ProductId);
         self.name = ko.observable(dto.Name);
         self.imgPath = ko.observable(dto.ImagePath);
-        self.priceString = ko.observable(Utilities.formatNumber(dto.EndUserPrice));
+        self.price = ko.observable(dto.PromotionPrice);
+        self.priceString = ko.observable(Utilities.formatNumber(dto.PromotionPrice));
         self.url = ko.observable(Utilities.buildWebUrl(dto.UrlSlug));
-        self.isNew = ko.observable(dto.New)
-        self.isGift = ko.observable(dto.Gift);
+        self.isNew = ko.observable(dto.IsNew)
+        self.isGift = ko.observable(dto.IsGift);
     }
 }
