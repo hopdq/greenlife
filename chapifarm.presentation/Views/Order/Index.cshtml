@@ -4,5 +4,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<main role="main" data-bind="with: header().cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <ol class="breadcrumb breadcrumb-arrow hidden-sm hidden-xs">
 
+                    <li><a href="/" target="_self">Trang chủ</a></li>
+
+
+
+                    <li class="active">
+                        Giỏ hàng: <span id="ajax-breadcrumb-cart-item-count" data-bind="text: totalProduct"></span>
+
+                        <span id="ajax-breadcrumb-cart-item-text">sản phẩm</span> -
+
+                        <span id="ajax-breadcrumb-cart-total-price"><span data-bind="text:totalPrice"></span>₫</span>
+                    </li>
+
+
+
+                </ol>
+            </div>
+        </div>
+        <div id="cart">
+            <span class="header-page hidden clearfix">
+                <h1>Giỏ hàng</h1>
+            </span>
+            <!-- Begin empty cart -->
+
+            <div class="row" data-bind="ifnot:noneProduct">
+                <div id="layout-page" class="col-md-12">
+                    <form action="/cart" method="post" id="cartformpage">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="image">Ảnh SP</th>
+                                    <th class="item">Tên sản phẩm</th>
+                                    <th class="qty">Số lượng</th>
+                                    <th class="price">Giá tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ko foreach: orderLine -->
+                                <tr>
+                                    <td class="image">
+                                        <div class="product_image">
+                                            <a data-bind="attr: {href:orderLine().product().url()}">
+                                                <img data-bind="attr: {src:orderLine().product().imgPath()}" />
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="item">
+                                        <a data-bind="attr: {href:orderLine().product().url()}">
+                                            <strong  data-bind="text:orderLine().product().name()"></strong>
+
+                                            <br /><a href="javascript:javascript.void(0)" data-bind="click:cart().remove(orderLine)" class="btn remove cart">Xóa</a>
+                                        </a>
+                                    </td>
+                                    <td class="qty">
+                                        <input type="number" size="4" name="updates[]" min="1" id="updates_1009354646" data-bind="value: orderLine().productCount()" onfocus="this.select();" class="form-control tc item-quantity" />
+                                    </td>
+                                    <td class="price text-center text-uppercase"><span data-bind="text: orderLine().linePrice()"></span></td>
+                                </tr>
+                                <!-- /ko -->
+                                <tr class="summary">
+                                    <td class="image">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class="text-center"><b>Tổng cộng:</b></td>
+                                    <td class="price text-center text-uppercase">
+                                        <span class="total">
+                                            <strong><span data-bind="text:totalPrice"></span>₫</strong>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <div class="checkout-buttons clearfix">
+                                    <textarea id="note" name="note" rows="3" cols="40" placeholder="Ghi chú"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 cart-buttons text-right">
+                                <div class="buttons clearfix">
+                                    <button type="submit" id="checkout" class="btn button-default" name="checkout" value="">Thanh toán</button>
+                                    <button type="submit" id="update-cart" class="btn button-default" name="update" value="">Cập nhật</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="/">
+                                    <i class="fa fa-reply"></i> Tiếp tục mua hàng
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="items-cart text-center not-item" data-bind="if:noneProduct">
+                <img src="//hstatic.net/704/1000059704/1000208939/no-item.png?v=426" alt="Bạn chưa có sản phẩm nào">
+                <p>
+                    <b>Bạn chưa có gì trong giỏ hàng cả</b>
+                </p>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 text-right buy-item inner-left inner-right ">
+                        <a href="/collections/all" class="btn button-default gotocollection">
+                            Mua hàng ngay<br><span>Giao hàng tận nơi ở TPHCM</span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-12 text-left back inner-right inner-left continue">
+                        <a class="btn button-default comeback" href="javascript:goback()">
+                            Trở về trang trước
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End cart -->
+        </div>
+    </div>
+</main>
+<script src="~/Scripts/order/order.knockout.js"></script>
+<script src="~/Scripts/order/order.ajax.js"></script>
