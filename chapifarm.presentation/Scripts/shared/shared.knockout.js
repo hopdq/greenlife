@@ -2,9 +2,10 @@ var BaseModel = (function () {
     function BaseModel() {
     }
     //static baseApiUrl: string = 'http://services.chapifarm.com/';
-    BaseModel.baseApiUrl = 'http://services.chapifarm.com/';
+    BaseModel.baseApiUrl = 'http://192.168.0.119:8096/';
     BaseModel.baseWebUrl = 'http://chapifarm.com/';
-    BaseModel.baseImgUrl = 'http://admin.chapifarm.com/';
+    //static baseImgUrl: string = 'http://admin.chapifarm.com/';
+    BaseModel.baseImgUrl = 'http://192.168.0.119:8088/';
     return BaseModel;
 }());
 var Layout = (function () {

@@ -1,18 +1,19 @@
 ﻿<section id="product-today" class="clearfix">
     <div class="container" data-bind="foreach: productsInCategories">
         <div class="row">
-            <div class="col-xs-12" data-bind="with:category">
+            <div class="col-xs-12">
                 <div class="tab_head clearfix">
-                    <h2 class="title pull-left" data-bind="text: name">
+                    <h2 class="title pull-left">
                         <span class="stick_teacoffee"></span>
+                        <span data-bind="text:category().name"></span>
                     </h2>
                     <ul class="nav nav-tabs pull-left product-list-tab" role="tablist">
-                        <li class="active">
+                        @*<li class="active">
                             <a href="#today_tab1" data-toggle="tab">Tất cả</a>
-                        </li>
-                        <!-- ko foreach: $parent.tabs -->
+                        </li>*@
+                        <!-- ko foreach: tabs -->
                         <li class="">
-                            <a data-bind="text: category.name, click: fetchProducts" href="javascript:void(0)" data-toggle="tab">
+                            <a data-bind="text: category.name, click: function(data, event){$parent.switchTab.call($parent, data, event)}" href="javascript:void(0)" data-toggle="tab">
                             </a>
                         </li>
                         <!-- /ko -->
@@ -31,7 +32,7 @@
                                                 <img data-bind="attr: { src: imgPath }" />
                                             </a>
                                         </div>
-                                        <a href="javascript:void(0)"  data-bind="id: id" class="btn btn-addtcart">THÊM VÀO GIỎ</a>
+                                        <a href="javascript:void(0)"  data-bind="id: id" class="btn btn-addtcart">Xem chi tiết</a>
                                         <div class="product-detail text-center clearfix">
                                             <h3 class="pro-name">
                                                 <a data-bind="attr: { href: url, title: name}, text: name"></a>
