@@ -8,15 +8,18 @@
 class Layout<T extends BaseBody> {
     header: KnockoutObservable<Header>;
     body: KnockoutObservable<T>;
+    footer: KnockoutObservable<Footer>;
     constructor(body: T) {
         var self = this;
         self.header = ko.observable(new Header());
         self.body = ko.observable(body);
+        self.footer = ko.observable(new Footer());
     }
     init() {
         var self = this;
         self.header().init();
         self.body().init();
+        self.footer().init();
     }
 }
 class Header {
@@ -44,23 +47,55 @@ class Header {
 }
 class Footer {
     aroundFarm: KnockoutObservable<AroundFarm>;
-    showroom: KnockoutObservable<String>;
-    orderInfo: KnockoutObservable<String>;
-    categoryFooter: KnockoutObservable<String>;
-    contact: KnockoutObservable<String>;
+    showroom: KnockoutObservable<Showroom>;
+    categoryFooter: KnockoutObservableArray<Category>;
+    contactInfo: KnockoutObservable<String>;
     constructor() {
         var self = this;
         self.aroundFarm = ko.observable(new AroundFarm());
+        self.showroom = ko.observable(new Showroom());
     }
     init() {
         var self = this;
-        //CommonServices.fetchCategoryTree().done(function (categories: Array<CategoryDto>) {
-        //    if (categories != null && categories.length > 0) {
-        //        $.each(categories, function (idx: number, cate: CategoryDto) {
-        //            self.navigation.push(new Category(cate));
-        //        });
-        //    }
-        //});
+        self.initChapiAround();
+        self.initShowroom();
+    }
+    initChapiAround() {
+        var self = this;
+        var cpa = new AroundFarm();
+        var temp = ['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá'];
+        for (var j = 0; j < temp.length; j++){
+            var aTag = new ATag();
+            aTag.name(temp[j]);
+            aTag.href("https://caudatfarm.com/");
+            cpa.collections.push(aTag);
+        }
+        var aroundBanner = [];
+        for (var i = 0; i < 10; i++) {
+            var bdto = new BannerDto();
+            bdto.Id = i + "";
+            bdto.Link = "https://caudatfarm.com/";
+            bdto.Text = "banner: " + i;
+            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_7.jpg?v=426";
+            var bn = new Banner(bdto);
+            cpa.banner.push(bn);
+        }
+        self.aroundFarm(cpa);
+    }
+    initShowroom() {
+        var self = this;
+        //fake data
+        var sr = new Showroom();
+        for (var i = 0; i < 10; i++) {
+            var bdto = new BannerDto();
+            bdto.Id = i + "";
+            bdto.Link = "https://caudatfarm.com/";
+            bdto.Text = "banner: " + i;
+            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426";
+            var bn = new Banner(bdto);
+            sr.banners.push(bn);
+        }
+        self.showroom(sr);
     }
 }
 interface BaseBody {
@@ -96,7 +131,8 @@ class Banner {
     constructor(dto: BannerDto) {
         this.id = ko.observable(dto.Id);
         this.text = ko.observable(dto.Text);
-        this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
+        //this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
+        this.imgPath = ko.observable(dto.ImgPath);
         this.link = ko.observable(dto.Link)
     }
 }
@@ -172,3 +208,36 @@ jQuery(document).ready(function ($) {
     }
     )
 })
+class AroundFarm {
+    title: KnockoutObservable<string>;
+    collections: KnockoutObservableArray<ATag>;
+    banner: KnockoutObservableArray<Banner>;
+    constructor() {
+        var self = this;
+        self.title = ko.observable("Chapi Farm - Nông Trại Ba Vì");
+        self.collections = ko.observableArray([]);
+        self.banner = ko.observableArray([]);
+        
+    }
+    init() {
+        var self = this;
+    }
+}
+class Showroom {
+    title: KnockoutObservable<string>;
+    banners: KnockoutObservableArray<Banner>;
+    constructor() {
+        var self = this;
+        self.title = ko.observable("- Phạm Hùng");
+        self.banners = ko.observableArray([]);
+    }
+}
+class ATag {
+    name: KnockoutObservable<String>;
+    href: KnockoutObservable<String>;
+    constructor() {
+        var self = this;
+        self.name = ko.observable("");
+        self.href = ko.observable("");
+    }
+}
