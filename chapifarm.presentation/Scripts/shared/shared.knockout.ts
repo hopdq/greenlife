@@ -43,6 +43,7 @@ class Header {
                 });
             }
         });
+        self.cart().init();
     }
 }
 class Footer {
@@ -141,9 +142,11 @@ class Cart {
     totalProduct: KnockoutObservable<number>;
     totalPrice: KnockoutObservable<number>;
     noneProduct: KnockoutObservable<boolean>;
+    cookie: KnockoutObservable<CartCookie>;
     constructor() {
         var self = this;
         self.orderLine = ko.observableArray([]);
+        self.cookie = ko.observable(new CartCookie());
         self.totalProduct = ko.computed(function () {
             var totalProduct = 0;
             for (var i = 0; i < self.orderLine().length; i++) {
@@ -162,8 +165,26 @@ class Cart {
             return self.totalProduct() == 0;
         })
     }
+    init() {
+        var self = this;
+        //var orderList = self.cookie().fetch();
+        //var productIdArr = new Array<string>();
+        //for (var i = 0; i < orderList.length; i++) {
+        //    productIdArr.push(orderList()[i].id());
+        //}
+        var productIdArr = ['PC0D3B4932D55B4', 'PC2986F10A7F624', 'PC622AD417B3AF4'];
+        OrderServices.fetchOrderProduct(productIdArr).done(function (productDtos: Array<ProductDto>) {
+            if (productDtos != null) {
+                $.each(productDtos, function (idx: number, productDto: ProductDto) {
+                    var product = new Product(productDto);
+                    self.add(product);
+                });
+            }
+        })
+    }
     remove(orderLine: OrderLine) {
         this.orderLine.remove(orderLine);
+        this.cookie().remove(orderLine.product().id());
     }
     add(product: Product) {
         for (var i = 0; i < this.orderLine.length; i++) {
@@ -173,15 +194,21 @@ class Cart {
                 var orderLine = new OrderLine(product);
                 this.orderLine().push(orderLine);
             }
+            this.cookie().add(product.id());
         }
     }
 }
 class OrderLine {
     productCount: KnockoutObservable<number>;
+    linePrice: KnockoutObservable<number>;
     product: KnockoutObservable<Product>;
     constructor(product: Product) {
-        this.productCount = ko.observable(1);
-        this.product = ko.observable(product);
+        var self = this;
+        self.productCount = ko.observable(1);
+        self.product = ko.observable(product);
+        self.linePrice = ko.computed(function () {
+            return product.price() * self.productCount();
+        })
     }
     increase() {
         var self = this;
