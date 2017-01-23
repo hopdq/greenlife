@@ -1,5 +1,6 @@
 ﻿
 class OrderServices {
+<<<<<<< .merge_file_a07844
     static fetchOrderProduct(productIds: Array<string>): JQueryPromise<Array<ProductDto>> {
         var dfd = $.Deferred();
         var url = Utilities.buildApiUrl('api/products/productsByIds');
@@ -18,4 +19,7 @@ class OrderServices {
         });
         return dfd.promise();
     }
+=======
+    
+>>>>>>> .merge_file_a07372
 }

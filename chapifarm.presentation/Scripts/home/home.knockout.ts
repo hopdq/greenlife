@@ -8,6 +8,7 @@ class HomeBodyModel implements BaseBody {
     slider: KnockoutObservableArray<Banner>;
     featureProducts: KnockoutObservableArray<Banner>;
     productsInCategories: KnockoutObservableArray<ProductsInCategory>;
+    chapiAround: KnockoutObservable<AroundFarm>;
     constructor() {
         this.slider = ko.observableArray([]);
         this.featureProducts = ko.observableArray([]);

@@ -17,6 +17,15 @@ var CommonServices = (function () {
         });
         return dfd.promise();
     };
+    CommonServices.fetchOrderProduct = function (productIds) {
+        var dfd = $.Deferred();
+        var url = Utilities.buildApiUrl('api/products/productsByIds');
+        var params = { Ids: productIds };
+        $.post(url, params, function (data) {
+            dfd.resolve(data);
+        });
+        return dfd.promise();
+    };
     return CommonServices;
 }());
 //# sourceMappingURL=shared.ajax.js.map
