@@ -16,4 +16,3 @@ var Utilities = (function () {
     };
     return Utilities;
 }());
-//# sourceMappingURL=ultilities.js.map

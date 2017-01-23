@@ -13,11 +13,13 @@ var Layout = (function () {
         var self = this;
         self.header = ko.observable(new Header());
         self.body = ko.observable(body);
+        self.footer = ko.observable(new Footer());
     }
     Layout.prototype.init = function () {
         var self = this;
         self.header().init();
         self.body().init();
+        self.footer().init();
     };
     return Layout;
 }());
@@ -41,6 +43,56 @@ var Header = (function () {
     };
     return Header;
 }());
+var Footer = (function () {
+    function Footer() {
+        var self = this;
+        self.aroundFarm = ko.observable(new AroundFarm());
+        self.showroom = ko.observable(new Showroom());
+    }
+    Footer.prototype.init = function () {
+        var self = this;
+        self.initChapiAround();
+        self.initShowroom();
+    };
+    Footer.prototype.initChapiAround = function () {
+        var self = this;
+        var cpa = new AroundFarm();
+        var temp = ['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá'];
+        for (var j = 0; j < temp.length; j++) {
+            var aTag = new ATag();
+            aTag.name(temp[j]);
+            aTag.href("https://caudatfarm.com/");
+            cpa.collections.push(aTag);
+        }
+        var aroundBanner = [];
+        for (var i = 0; i < 10; i++) {
+            var bdto = new BannerDto();
+            bdto.Id = i + "";
+            bdto.Link = "https://caudatfarm.com/";
+            bdto.Text = "banner: " + i;
+            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_7.jpg?v=426";
+            var bn = new Banner(bdto);
+            cpa.banner.push(bn);
+        }
+        self.aroundFarm(cpa);
+    };
+    Footer.prototype.initShowroom = function () {
+        var self = this;
+        //fake data
+        var sr = new Showroom();
+        for (var i = 0; i < 10; i++) {
+            var bdto = new BannerDto();
+            bdto.Id = i + "";
+            bdto.Link = "https://caudatfarm.com/";
+            bdto.Text = "banner: " + i;
+            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426";
+            var bn = new Banner(bdto);
+            sr.banners.push(bn);
+        }
+        self.showroom(sr);
+    };
+    return Footer;
+}());
 var Category = (function () {
     function Category(dto) {
         var self = this;
@@ -62,7 +114,8 @@ var Banner = (function () {
     function Banner(dto) {
         this.id = ko.observable(dto.Id);
         this.text = ko.observable(dto.Text);
-        this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
+        //this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
+        this.imgPath = ko.observable(dto.ImgPath);
         this.link = ko.observable(dto.Link);
     }
     return Banner;
@@ -136,4 +189,31 @@ jQuery(document).ready(function ($) {
         }
     });
 });
-//# sourceMappingURL=shared.knockout.js.map
+var AroundFarm = (function () {
+    function AroundFarm() {
+        var self = this;
+        self.title = ko.observable("Chapi Farm - Nông Trại Ba Vì");
+        self.collections = ko.observableArray([]);
+        self.banner = ko.observableArray([]);
+    }
+    AroundFarm.prototype.init = function () {
+        var self = this;
+    };
+    return AroundFarm;
+}());
+var Showroom = (function () {
+    function Showroom() {
+        var self = this;
+        self.title = ko.observable("- Phạm Hùng");
+        self.banners = ko.observableArray([]);
+    }
+    return Showroom;
+}());
+var ATag = (function () {
+    function ATag() {
+        var self = this;
+        self.name = ko.observable("");
+        self.href = ko.observable("");
+    }
+    return ATag;
+}());

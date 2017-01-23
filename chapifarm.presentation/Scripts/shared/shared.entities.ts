@@ -50,3 +50,4 @@ class ProductDto {
     customise3: string
     AverageStar: number
 }
+

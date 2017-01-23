@@ -32,4 +32,3 @@ var ProductDto = (function () {
     }
     return ProductDto;
 }());
-//# sourceMappingURL=shared.entities.js.map
