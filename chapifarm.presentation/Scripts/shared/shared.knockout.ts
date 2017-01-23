@@ -173,7 +173,7 @@ class Cart {
         //    productIdArr.push(orderList()[i].id());
         //}
         var productIdArr = ['PC0D3B4932D55B4', 'PC2986F10A7F624', 'PC622AD417B3AF4'];
-        OrderServices.fetchOrderProduct(productIdArr).done(function (productDtos: Array<ProductDto>) {
+        CommonServices.fetchOrderProduct(productIdArr).done(function (productDtos: Array<ProductDto>) {
             if (productDtos != null) {
                 $.each(productDtos, function (idx: number, productDto: ProductDto) {
                     var product = new Product(productDto);
