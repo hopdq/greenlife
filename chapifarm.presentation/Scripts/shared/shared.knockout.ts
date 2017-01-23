@@ -1,9 +1,9 @@
 ﻿class BaseModel {
     //static baseApiUrl: string = 'http://services.chapifarm.com/';
-    static baseApiUrl: string = 'http://192.168.0.119:8096/';
+    static baseApiUrl: string = 'http://192.168.0.100:8096/';
     static baseWebUrl: string = 'http://chapifarm.com/';
     //static baseImgUrl: string = 'http://admin.chapifarm.com/';
-    static baseImgUrl: string = 'http://192.168.0.119:8088/';
+    static baseImgUrl: string = 'http://192.168.0.100:8088/';
 }
 class Layout<T extends BaseBody> {
     header: KnockoutObservable<Header>;
