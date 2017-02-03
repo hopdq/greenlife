@@ -28,17 +28,6 @@
 
                     </div>
                 </div>
-                <script>
-                    $(document).ready(function () {
-                        var swiper = new Swiper('.caudat_around_slider_1', {
-                            pagination: '.caudat_as1_pagination',
-                            autoplay: 5000,
-                            slidesPerView: 3,
-                            paginationClickable: true,
-                            spaceBetween: 30
-                        });
-                    });
-                </script>
             </div>
         </center>
         <center class="link_around">
@@ -47,48 +36,37 @@
     </div>
 </section>
 
-<section id="caudat_showroom" data-bind="with: footer">
+<section id="caudat_showroom" data-bind="with: footer().showroom">
     <div class="container">
-        <div class="title_around_2">
-            <h2 class="title text-uppercase">
-                Showroom <span data-bind="text: showroom().title()"></span>
-            </h2>
-        </div>
         <div id="caudat_around_tab2">
             <div class="caudat_around_slider_2 owl-carousel owl-theme" style="opacity: 1; display: block;">
-
                 <div class="owl-wrapper-outer autoHeight" style="height: 439px;">
-                    <div data-bind="foreach: showroom().banners()" class="owl-wrapper" style="width: 11700px; left: 0px; display: block; transition: all 400ms ease; transform: translate3d(-4680px, 0px, 0px);">
+                    <div class="owl-wrapper" style="width: 11700px; left: 0px; display: block; transition: all 400ms ease; transform: translate3d(-4680px, 0px, 0px);" data-bind="foreach: addresses">
                         <div class="owl-item" style="width: 1170px;">
+                            <div class="title_around_2">
+                                <h2 class="title text-uppercase">
+                                    Showroom <span data-bind="text: name"></span>
+                                </h2>
+                            </div>
                             <div class="item">
-                                <a data-bind="attr: {href: link}">
-                                    <img data-bind="attr: {src: imgPath, alt: text}">
+                                <a href="javascript:void(0);">
+                                    <img data-bind="attr: {src: imgPath, alt: name}">
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" id="bottomSliderInitFlag" />
                 <div class="owl-controls clickable">
-                    <div class="owl-pagination">
-                        <div class="owl-page">
-                            <span class=""></span>
-                        </div>
-                        <div class="owl-page">
-                            <span class=""></span>
-                        </div>
-                        <div class="owl-page">
-                            <span class=""></span>
-                        </div><div class="owl-page">
-                            <span class=""></span>
-                        </div>
+                    <div class="owl-pagination" data-bind="foreach: addresses">
                         <div class="owl-page active">
                             <span class=""></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <script> $(document).ready(function () { $(".caudat_around_slider_2").owlCarousel({ navigation: false, pagination: true, navigationText: ["<i class='fa fa-long-arrow-left' aria-hidden='true'></i>", "<i class='fa fa-long-arrow-right' aria-hidden='true'></i>"], slideSpeed: 300, paginationSpeed: 400, autoPlay: true, autoHeight: true, singleItem: true }); }); </script> <div class="place_showroom"> <a href="/pages/showroom" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> Xem đường đi</a> </div>
+            <div class="place_showroom"> <a href="/pages/showroom" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> Xem đường đi</a> </div>
+            <input type="hidden" id="showroomSliderInitFlag" />
         </div>
     </div>
 </section>
@@ -183,4 +161,30 @@
 
         </div>
     </div>
-</section> 
+</section>
+<script>
+    $(document).ready(function () {
+        $('#bottomSliderInitFlag').on('change', function () {
+            var swiper = new Swiper('.caudat_around_slider_1', {
+                pagination: '.caudat_as1_pagination',
+                autoplay: 5000,
+                slidesPerView: 3,
+                paginationClickable: true,
+                spaceBetween: 30
+            });
+        });
+        $('#showroomSliderInitFlag').on('change', function () {
+            $(".caudat_around_slider_2").owlCarousel({
+                navigation: false,
+                pagination: true,
+                navigationText: ["<i class='fa fa-long-arrow-left' aria-hidden='true'></i>",
+                    "<i class='fa fa-long-arrow-right' aria-hidden='true'></i>"],
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                autoPlay: true,
+                autoHeight: true,
+                singleItem: true
+            });
+        });
+    });
+</script>

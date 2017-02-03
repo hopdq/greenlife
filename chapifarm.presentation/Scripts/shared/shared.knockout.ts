@@ -64,39 +64,40 @@ class Footer {
     initChapiAround() {
         var self = this;
         var cpa = new AroundFarm();
-        var temp = ['Nhà máy trà cổ', 'Đồi trà Cầu Đất Farm', 'Vườn rau thủy canh', 'Khu vườn sen đá'];
-        for (var j = 0; j < temp.length; j++){
-            var aTag = new ATag();
-            aTag.name(temp[j]);
-            aTag.href("https://caudatfarm.com/");
-            cpa.collections.push(aTag);
-        }
-        var aroundBanner = [];
-        for (var i = 0; i < 10; i++) {
-            var bdto = new BannerDto();
-            bdto.Id = i + "";
-            bdto.Link = "https://caudatfarm.com/";
-            bdto.Text = "banner: " + i;
-            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_1_img_7.jpg?v=426";
-            var bn = new Banner(bdto);
-            cpa.banner.push(bn);
-        }
+        CommonServices.fetchNewsCategoryTopLevel().done(function (data: Array<NewsCategoryDto>) {
+            if (data != null && data.length > 0) {
+                $.each(data, function (idx, item) {
+                    var aTag = new ATag();
+                    aTag.name(item.Name);
+                    aTag.href(item.UrlSlug);
+                    cpa.collections.push(aTag);
+                });
+            }
+        });
+        CommonServices.fetchBannerByPositionPage(BannerPageEnum.Home, BannerPosEnum.Bottom).done(function (data: Array<BannerDto>) {
+            if (data != null && data.length > 0) {
+                $.each(data, function (idx: any, item: BannerDto) {
+                    var bn = new Banner(item);
+                    cpa.banner.push(bn);
+                });
+                $('#bottomSliderInitFlag').trigger('change');
+            }
+        });
         self.aroundFarm(cpa);
     }
     initShowroom() {
         var self = this;
-        //fake data
-        var sr = new Showroom();
-        for (var i = 0; i < 10; i++) {
-            var bdto = new BannerDto();
-            bdto.Id = i + "";
-            bdto.Link = "https://caudatfarm.com/";
-            bdto.Text = "banner: " + i;
-            (i % 2) == 0 ? bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426" : bdto.ImgPath = "https://hstatic.net/704/1000059704/1000208939/tab_footer_2_img_3.jpg?v=426";
-            var bn = new Banner(bdto);
-            sr.banners.push(bn);
-        }
-        self.showroom(sr);
+        CommonServices.fetchAllAddresses().done(function (addresses: Array<AddressDto>) {
+            if (addresses != null && addresses.length > 0) {
+                $.each(addresses, function (idx: any, add: AddressDto) {
+                    var address = new Address(add);
+                    var sr = new Showroom();
+                    sr.addresses.push(address);
+                    self.showroom(sr);
+                });
+                $('#showroomSliderInitFlag').trigger('change');
+            }
+        });
     }
 }
 interface BaseBody {
@@ -132,8 +133,8 @@ class Banner {
     constructor(dto: BannerDto) {
         this.id = ko.observable(dto.Id);
         this.text = ko.observable(dto.Text);
-        //this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
-        this.imgPath = ko.observable(dto.ImgPath);
+        this.imgPath = ko.observable(Utilities.buildImgUrl(dto.ImgPath));
+        //this.imgPath = ko.observable(dto.ImgPath);
         this.link = ko.observable(dto.Link)
     }
 }
@@ -244,19 +245,17 @@ class AroundFarm {
         self.title = ko.observable("Chapi Farm - Nông Trại Ba Vì");
         self.collections = ko.observableArray([]);
         self.banner = ko.observableArray([]);
-        
+
     }
     init() {
         var self = this;
     }
 }
 class Showroom {
-    title: KnockoutObservable<string>;
-    banners: KnockoutObservableArray<Banner>;
+    addresses: KnockoutObservableArray<Address>;
     constructor() {
         var self = this;
-        self.title = ko.observable("- Phạm Hùng");
-        self.banners = ko.observableArray([]);
+        self.addresses = ko.observableArray([]);
     }
 }
 class ATag {
@@ -266,5 +265,15 @@ class ATag {
         var self = this;
         self.name = ko.observable("");
         self.href = ko.observable("");
+    }
+}
+class Address {
+    id: KnockoutObservable<string>;
+    name: KnockoutObservable<string>;
+    imgPath: KnockoutObservable<string>;
+    constructor(dto: AddressDto) {
+        this.id = ko.observable(dto.AddressId);
+        this.name = ko.observable(dto.Name);
+        this.imgPath = ko.observable(Utilities.buildImgUrl(dto.HinhAnh));
     }
 }

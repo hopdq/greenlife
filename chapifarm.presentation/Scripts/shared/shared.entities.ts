@@ -20,6 +20,7 @@ class BannerPageEnum {
 class BannerPosEnum {
     static Top: string = "Top";
     static Body: string = "";
+    static Bottom: string = "Bottom";
 }
 
 class DateGetInfoEnum {
@@ -50,4 +51,13 @@ class ProductDto {
     customise3: string
     AverageStar: number
 }
-
+class NewsCategoryDto {
+    Id: string;
+    Name: string;
+    UrlSlug: string;
+}
+class AddressDto {
+    AddressId: string;
+    Name: string;
+    HinhAnh: string;
+}

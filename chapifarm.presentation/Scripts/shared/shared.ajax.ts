@@ -24,4 +24,20 @@
         })
         return dfd.promise();
     }
+    static fetchNewsCategoryTopLevel(): JQueryPromise<Array<NewsCategoryDto>> {
+        var dfd = $.Deferred();
+        var url = Utilities.buildApiUrl('api/newsCategory/getTopLevel');
+        $.get(url, function (data: Array<NewsCategoryDto>) {
+            dfd.resolve(data);
+        })
+        return dfd.promise();
+    }
+    static fetchAllAddresses(): JQueryPromise<Array<AddressDto>> {
+        var dfd = $.Deferred();
+        var url = Utilities.buildApiUrl('api/address/fetchAll');
+        $.get(url, function (data: Array<AddressDto>) {
+            dfd.resolve(data);
+        })
+        return dfd.promise();
+    }
 }
